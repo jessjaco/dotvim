@@ -1,16 +1,10 @@
-"if hostname() == 'CSPHUB'
-"    let PPDIR = $APDIR . '\Portable Python 2.7.2.1\App'
-"    let $PATH .= ';' . PPDIR
-"    let $PYTHONPATH .= ';' .  PPDIR . '\Lib'
-"endif 
-
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+source ~/vimfiles/bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect('~/vimfiles/bundle/{}')
 set nocompatible
 set smartindent
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
-set tabstop=4
+set tabstop=2
 set cc=80
 syntax enable
 filetype plugin on
@@ -23,14 +17,14 @@ let g:pydiction_location = '~\vimfiles\bundle\pydiction\complete-dict'
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=999 columns=100
+  set lines=60 columns=90
 else
   " This is console Vim.
   if exists("+lines")
-    set lines=50
+    set lines=35
   endif
   if exists("+columns")
-    set columns=100
+    set columns=90
   endif
 endif
 
