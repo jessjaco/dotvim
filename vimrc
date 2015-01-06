@@ -6,6 +6,7 @@ set shiftwidth=2
 set expandtab
 set tabstop=2
 set cc=80
+let g:vim_markdown_folding_disabled=1
 syntax enable
 filetype plugin on
 filetype indent on

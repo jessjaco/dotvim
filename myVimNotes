@@ -9,16 +9,11 @@ then link .vimrc .gvimrc to the appropriate place
 in windows (in %USERPROFILE% dir):
 mklink /H "_vimrc" "vimfiles\vimrc"
 
-To add changes to repo
-git commit -a -m ""
-git push origin master
-
 To add submodule
 git add <url> bundle\<name>
 
 To update submodules
 git submodule foreach git pull origin master
-
 
 To get R plugin working when you're using 2.6 and portable python
 Do not add portable python dir to path - see vimrc
