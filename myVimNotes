@@ -10,7 +10,7 @@ in windows (in %USERPROFILE% dir):
 mklink /H "_vimrc" "vimfiles\vimrc"
 
 To add submodule
-git add <url> bundle\<name>
+git submodule add <url> bundle\<name>
 
 To update submodules
 git submodule foreach git pull origin master

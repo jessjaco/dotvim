@@ -10,3 +10,18 @@
 	path = bundle/screen
 	url = https://github.com/ervandew/screen.git
   ignore = untracked
+[submodule "bundle/vim-pandoc"]
+	path = bundle/vim-pandoc
+	url = git://github.com/vim-pandoc/vim-pandoc
+[submodule "bundle/vim-pandoc-syntax"]
+	path = bundle/vim-pandoc-syntax
+	url = git://github.com/vim-pandoc/vim-pandoc-syntax
+[submodule "bundle/vim-rmarkdown"]
+	path = bundle/vim-rmarkdown
+	url = git://github.com/vim-pandoc/vim-rmarkdown
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = git://github.com/godlygeek/tabular
+[submodule "bundle/xmledit"]
+	path = bundle/xmledit
+	url = git://github.com/sukima/xmledit
