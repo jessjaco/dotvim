@@ -25,3 +25,9 @@
 [submodule "bundle/xmledit"]
 	path = bundle/xmledit
 	url = git://github.com/sukima/xmledit
+[submodule "bundleR-Vim-runtime"]
+	path = bundleR-Vim-runtime
+	url = https://github.com/jalvesaq/R-Vim-runtime
+[submodule "bundle/R-Vim-runtime"]
+	path = bundle/R-Vim-runtime
+	url = https://github.com/jalvesaq/R-Vim-runtime
