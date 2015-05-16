@@ -10,11 +10,13 @@
     # in windows (in %USERPROFILE% dir):
     mklink /H "_vimrc" "vimfiles\vimrc"
 
-##To add submodule
-`git submodule add <url> bundle\<name>`
+##To add plugin
+add 
 
-##To update submodules
-`git submodule foreach git pull origin master`
+    Plugin 'username/repo'
+
+to vimrc, then launch vim and type `:PluginInstall`. Use `:PluginUpdate` to
+update plugins
 
 ##To get R plugin working when you're using 2.6 and portable python
 Do not add portable python dir to path - see vimrc

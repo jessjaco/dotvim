@@ -1,10 +1,29 @@
-" Use pathogen. Other people seem to use other stuff now, but I havent had a 
-" chance to figure out why
-source ~/vimfiles/bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect('~/vimfiles/bundle/{}')
-
 " Don't make vim compatible with vi
 set nocompatible
+
+" Turn off filetype until Vundle is initialized
+filetype off
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/vimfiles/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'rkulla/pydiction'
+Plugin 'vim-scripts/Vim-R-plugin'
+Plugin 'ervandew/screen'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'vim-pandoc/vim-rmarkdown'
+Plugin 'godlygeek/tabular'
+Plugin 'sukima/xmledit'
+Plugin 'jalvesaq/R-Vim-runtime'
+"
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " For indenting newlines in a reasonable way
 set smartindent
@@ -24,19 +43,17 @@ set cc=80
 " enable syntax highlighting
 syntax enable
 
-" enable filetype detection 
-filetype plugin on
-filetype indent on
+" Set location of pydiction (autocomplete plugin for python) file
+" This _should_ work everywhere
 
+let g:pydiction_location = '~\vimfiles\bundle\pydiction\complete-dict'
 " Hard wrap at 80 for "pandoc" documents plus some "smartyness"
 let g:pandoc#formatting#mode="h"
+let g:pandoc#spell#enabled=0
 
 " For indenting xml correctly
 map <F2><Esc>:1,$!xmllint --format -<CR>
 
-" Set location of pydiction (autocomplete plugin for python) file
-" This _should_ work everywhere
-let g:pydiction_location = '~\vimfiles\bundle\pydiction\complete-dict'
 
 " Set window size
 if has("gui_running")
