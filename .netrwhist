@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='E:/Projects/smaller_projects/borneo/code/trunk'
-let g:netrw_dirhist_2='E:/Projects/Navajo_Connectivity/Code/trunk'
-let g:netrw_dirhist_3='E:/Projects/Navajo_Connectivity/Code/trunk/bear'
-let g:netrw_dirhist_4='E:/Projects/GCT/Pronghorn/code/trunk'
-let g:netrw_dirhist_5='E:/Projects/smaller_projects/AZGF/fox/code/trunk'
