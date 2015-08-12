@@ -20,6 +20,8 @@ Plugin 'vim-pandoc/vim-rmarkdown'
 Plugin 'godlygeek/tabular'
 Plugin 'sukima/xmledit'
 Plugin 'jalvesaq/R-Vim-runtime'
+Plugin 'flazz/vim-colorschemes'
+
 "
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -37,6 +39,18 @@ set expandtab
 " Number of spaces for each tab
 set tabstop=2
 
+" Not sure, was in sensible.vim
+set smarttab
+
+" Tells us where the cursor is 
+set ruler
+
+" Shows command in lower right
+set showcmd
+
+" Helps with wildcard expansion
+set wildmenu
+
 " Make column 80 red
 set cc=80
 
@@ -45,8 +59,8 @@ syntax enable
 
 " Set location of pydiction (autocomplete plugin for python) file
 " This _should_ work everywhere
-
 let g:pydiction_location = '~\vimfiles\bundle\pydiction\complete-dict'
+"
 " Hard wrap at 80 for "pandoc" documents plus some "smartyness"
 let g:pandoc#formatting#mode="h"
 let g:pandoc#spell#enabled=0
@@ -54,6 +68,11 @@ let g:pandoc#spell#enabled=0
 " For indenting xml correctly
 map <F2><Esc>:1,$!xmllint --format -<CR>
 
+" Options for R files - may be useful elsewhere. Hard wrap comments only at 80
+" columns, and start the next line with a comment character
+autocmd FileType r setlocal tw=80 formatoptions-=t formatoptions+=acqrow
+" Use terminal R with vim-r-plugin
+let vimrplugin_applescript=0
 
 " Set window size
 if has("gui_running")
@@ -70,3 +89,6 @@ else
   endif
 endif
 
+" Set colorscheme, should look fine if terminal is reported as 256 color 
+" To check 'echo $TERM'. Haven't checked windows yet
+colorscheme jellybeans
