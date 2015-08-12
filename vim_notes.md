@@ -4,24 +4,16 @@
 
     git clone https://github.com/blindjesse/dotvim vimfiles
     cd vimfiles
-    git submodule init
-    git submodule update
     # then link .vimrc .gvimrc to the appropriate place 
     # in windows (in %USERPROFILE% dir):
     mklink /H "_vimrc" "vimfiles\vimrc"
 
 ##To add plugin
-add 
-
-    Plugin 'username/repo'
-
-to vimrc, then launch vim and type `:PluginInstall`. Use `:PluginUpdate` to
-update plugins
-
-##To get R plugin working when you're using 2.6 and portable python
-Do not add portable python dir to path - see vimrc
-Make sure includes are in pythonpath too - see vimrc
-Ignore error (for now) when loading R file
+1) Install Vundle (see vundle site; follow git directions if you need git)
+2) add 
+     Plugin 'username/repo'
+   to vimrc, then launch vim and type `:PluginInstall`. Use `:PluginUpdate` to
+   update plugins
 
 ## To change options for certain filetype.
 See options for whatever plugin we use for that filetype OR make a
