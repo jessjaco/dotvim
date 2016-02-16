@@ -6,7 +6,7 @@ filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/vimfiles/bundle/Vundle.vim
-call vundle#begin()
+call vundle#begin('~/vimfiles/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -21,8 +21,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'sukima/xmledit'
 Plugin 'jalvesaq/R-Vim-runtime'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'scrooloose/syntastic'
 
-"
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -72,7 +72,14 @@ map <F2><Esc>:1,$!xmllint --format -<CR>
 " columns, and start the next line with a comment character
 autocmd FileType r setlocal tw=80 formatoptions-=t formatoptions+=acqrow
 " Use terminal R with vim-r-plugin
-let vimrplugin_applescript=0
+let vimrplugin_applescript = 0
+" Try to remap _ remapping to ;
+let vimrplugin_assign_map = ";"
+"let vimrplugin_assign = 0
+
+"
+" make needs tabs
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 
 " Set window size
 if has("gui_running")
@@ -81,9 +88,6 @@ if has("gui_running")
   set lines=60 columns=90
 else
   " This is console Vim.
-  if exists("+lines")
-    set lines=35
-  endif
   if exists("+columns")
     set columns=90
   endif
@@ -92,6 +96,18 @@ endif
 " Set colorscheme, should look fine if terminal is reported as 256 color 
 " To check 'echo $TERM'. Haven't checked windows yet
 colorscheme jellybeans
+
+" syntastic recommended settings and lintr recommmended settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"let g:syntastic_enable_r_lintr_checker = 0
+"let g:syntastic_r_checkers = 0
 
 " Hub specific options
 if hostname() == "CSPHUB"
