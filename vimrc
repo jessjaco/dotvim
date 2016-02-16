@@ -92,3 +92,9 @@ endif
 " Set colorscheme, should look fine if terminal is reported as 256 color 
 " To check 'echo $TERM'. Haven't checked windows yet
 colorscheme jellybeans
+
+" Hub specific options
+if hostname() == "CSPHUB"
+  let vimrplugin_r_path = 'C:\\Program Files\\R\\R-3.2.1\\bin\\x64'
+endif 
+
