@@ -18,7 +18,7 @@
 " code in your file, set g:syntastic_enable_r_lintr_checker to 1 in
 " your vimrc to enable this checker:
 "
-let g:syntastic_enable_r_lintr_checker = 1
+" let g:syntastic_enable_r_lintr_checker = 1
 
 if exists("g:loaded_syntastic_r_lintr_checker")
     finish
@@ -30,7 +30,7 @@ if !exists('g:syntastic_r_lintr_linters')
 endif
 
 if !exists('g:syntastic_r_lintr_cache')
-    let g:syntastic_r_lintr_cache = 'TRUE'
+    let g:syntastic_r_lintr_cache = 'FALSE'
 endif
 
 let s:save_cpo = &cpo
@@ -45,19 +45,14 @@ function! SyntaxCheckers_r_lintr_IsAvailable() dict
     if !executable(self.getExec())
         return 0
     endif
-    call system(self.getExecEscaped() . ' --slave --restore --no-save -e ' . syntastic#util#shescape('library(lintr)'))
+    call system(self.getExecEscaped() . ' --slave --no-restore --no-save -e ' . syntastic#util#shescape('library(lintr)'))
     return v:shell_error == 0
 endfunction
 
 function! SyntaxCheckers_r_lintr_GetLocList() dict
-    if !exists('g:syntastic_enable_r_lintr_checker') || !g:syntastic_enable_r_lintr_checker
-        call syntastic#log#error('checker r/lintr: checks disabled for security reasons; set g:syntastic_enable_r_lintr_checker to 1 to override')
-        return []
-    endif
-
-    let setwd = syntastic#util#isRunningWindows() ? 'setwd(''' . escape(getcwd(), '"\') . '''); ' : ''
-    let makeprg = self.getExecEscaped() . ' --slave --restore --no-save' .
-        \ ' -e ' . syntastic#util#shescape(setwd . 'library(lintr); ' .
+    let setwd = syntastic#util#isRunningWindows() ? 'setwd("' . escape(getcwd(), '"\') . '"); ' : ''
+    let makeprg = self.getExecEscaped() . ' --slave --no-restore --no-save' .
+        \ ' -e ' . syntastic#util#shescape(setwd . 'suppressPackageStartupMessages(library(lintr)); ' .
         \       'lint(cache = ' . g:syntastic_r_lintr_cache . ', commandArgs(TRUE), ' . g:syntastic_r_lintr_linters . ')') .
         \ ' --args ' . syntastic#util#shexpand('%')
 
@@ -77,9 +72,10 @@ endfunction
 call g:SyntasticRegistry.CreateAndRegisterChecker({
     \ 'filetype': 'r',
     \ 'name': 'lintr',
-    \ 'exec': 'R' })
+    \ 'exec': 'R',
+    \ 'enable': 'enable_r_lintr_checker'})
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
-" vim: set et sts=4 sw=4:
+" vim: set sw=4 sts=4 et fdm=marker:

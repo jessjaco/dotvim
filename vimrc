@@ -5,7 +5,7 @@ set nocompatible
 filetype off
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/vimfiles/bundle/vundle
+set rtp+=~/vimfiles/bundle/Vundle.vim
 call vundle#begin('~/vimfiles/bundle')
 
 " let Vundle manage Vundle, required
@@ -111,6 +111,6 @@ let g:syntastic_check_on_wq = 0
 
 " Hub specific options
 if hostname() == "CSPHUB"
-  let vimrplugin_r_path = 'C:\\Program Files\\R\\R-3.2.1\\bin\\x64'
+  let vimrplugin_r_path = 'C:\\Program Files\\R\\R-3.2.3\\bin\\x64'
 endif 
 
