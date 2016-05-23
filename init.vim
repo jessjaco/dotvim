@@ -5,14 +5,20 @@ set nocompatible
 filetype off
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/vimfiles/bundle/Vundle.vim
-call vundle#begin('~/vimfiles/bundle')
+if has('nvim')
+  let s:editor_root=expand('~/.config/nvim')
+else
+  let s:editor_root=expand('~/vimfiles')
+endif  
+
+let &rtp = &rtp . ',' . s:editor_root . '/bundle/Vundle'
+call vundle#begin(s:editor_root . '/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-
 Plugin 'rkulla/pydiction'
-Plugin 'vim-scripts/Vim-R-plugin'
+" Plugin 'vim-scripts/Vim-R-plugin'
+Plugin 'jalvesaq/Nvim-R'
 Plugin 'ervandew/screen'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
@@ -89,7 +95,7 @@ if has("gui_running")
 else
   " This is console Vim.
   if exists("+columns")
-    set columns=90
+    set lines=999 columns=90
   endif
 endif
 
