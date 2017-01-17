@@ -1,3 +1,4 @@
+set nocompatible
 " Turn off filetype until Vundle is initialized
 filetype off
 
@@ -26,7 +27,6 @@ call vundle#rc(s:editor_root . '/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'rkulla/pydiction'
 " Plugin 'vim-scripts/Vim-R-plugin'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'ervandew/screen'
@@ -35,7 +35,7 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-rmarkdown'
 Plugin 'godlygeek/tabular'
 Plugin 'sukima/xmledit'
-Plugin 'jalvesaq/R-Vim-runtime'
+"Plugin 'jalvesaq/R-Vim-runtime' Do we need this?
 Plugin 'flazz/vim-colorschemes'
 Plugin 'scrooloose/syntastic'
 
@@ -44,36 +44,34 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 set showcmd "Show partial command in status line
-set smartindent " For indenting newlines in a reasonable way
 set shiftwidth=2 " Number of spaces for each level of indent
 set expandtab " Use spaces when you press tab
 set tabstop=2 " Number of spaces for each tab
 set smarttab " Not sure, was in sensible.vim
 set ruler " Tells us where the cursor is 
-
-" Helps with wildcard expansion
-set wildmenu
-
-" Make column 80 red
-set cc=80
+set wildmenu " Helps with wildcard expansion
+set cc=80 " Make column 80 red
 
 " enable syntax highlighting
 syntax enable
 
-" Set location of pydiction (autocomplete plugin for python) file
-" This _should_ work everywhere
-let g:pydiction_location = s:editor_root . '\pydiction\complete-dict'
-"
+" Make options
+" make needs tabs
+autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=0
+
+" Pandoc options
 " Hard wrap at 80 for "pandoc" documents plus some "smartyness"
 let g:pandoc#formatting#mode="h"
 let g:pandoc#spell#enabled=0
 
-" For indenting xml correctly
-map <F2><Esc>:1,$!xmllint --format -<CR>
+" python options
+autocmd FileType python setlocal shiftwidth=4 tabstop=4
 
-" Options for R files - may be useful elsewhere. Hard wrap comments only at 80
-" columns, and start the next line with a comment character
-autocmd FileType r setlocal tw=80 formatoptions-=t formatoptions+=acqrow
+
+" R options
+" Hard wrap comments only at 80 columns, and start the next line with a 
+" comment character
+autocmd FileType r setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
 " Use terminal R with vim-r-plugin
 let vimrplugin_applescript = 0
 " Try to remap _ remapping to ;
@@ -81,9 +79,10 @@ let vimrplugin_assign_map = ";"
 let R_assign_map = ";"
 let vimrplugin_assign = 0
 
-"
-" make needs tabs
-"autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+
+" Xml options
+" For indenting xml correctly
+map <F2><Esc>:1,$!xmllint --format -<CR>
 
 " Set window size
 "if has("gui_running")
