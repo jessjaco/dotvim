@@ -1,6 +1,3 @@
-" Don't make vim compatible with vi
-set nocompatible
-
 " Turn off filetype until Vundle is initialized
 filetype off
 
@@ -46,26 +43,13 @@ Plugin 'scrooloose/syntastic'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" For indenting newlines in a reasonable way
-set smartindent
-
-" Number of spaces for each level of indent
-set shiftwidth=2
-
-" Use spaces when you press tab
-set expandtab
-
-" Number of spaces for each tab
-set tabstop=2
-
-" Not sure, was in sensible.vim
-set smarttab
-
-" Tells us where the cursor is 
-set ruler
-
-" Shows command in lower right
-set showcmd
+set showcmd "Show partial command in status line
+set smartindent " For indenting newlines in a reasonable way
+set shiftwidth=2 " Number of spaces for each level of indent
+set expandtab " Use spaces when you press tab
+set tabstop=2 " Number of spaces for each tab
+set smarttab " Not sure, was in sensible.vim
+set ruler " Tells us where the cursor is 
 
 " Helps with wildcard expansion
 set wildmenu
@@ -95,39 +79,40 @@ let vimrplugin_applescript = 0
 " Try to remap _ remapping to ;
 let vimrplugin_assign_map = ";"
 let R_assign_map = ";"
-"let vimrplugin_assign = 0
+let vimrplugin_assign = 0
 
 "
 " make needs tabs
-autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+"autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 
 " Set window size
-if has("gui_running")
+"if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window.
-  set lines=60 columns=90
-else
+"  set lines=60 columns=90
+"else
   " This is console Vim.
-  if exists("+columns")
-    set lines=999 columns=90
-  endif
-endif
+"  if exists("+columns")
+"    set lines=999 columns=90
+"  endif
+"endif
 
 " Set colorscheme, should look fine if terminal is reported as 256 color 
 " To check 'echo $TERM'. Haven't checked windows yet
 colorscheme jellybeans
 
 " syntastic recommended settings and lintr recommmended settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Caused some probs with neovim, just check these
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-"let g:syntastic_enable_r_lintr_checker = 0
-"let g:syntastic_r_checkers = 0
+let g:syntastic_enable_r_lintr_checker = 0
+let g:syntastic_r_checkers = 0
 
 " Hub specific options
 if hostname() == "CSPHUB"
