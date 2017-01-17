@@ -10,6 +10,7 @@
 
 ##To add plugin
 1) Install Vundle (see vundle site; follow git directions if you need git)
+  But see updates to init.vim which may install it automatically
 2) add 
      Plugin 'username/repo'
    to vimrc, then launch vim and type `:PluginInstall`. Use `:PluginUpdate` to

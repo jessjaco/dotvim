@@ -11,8 +11,21 @@ else
   let s:editor_root=expand('~/vimfiles')
 endif  
 
-let &rtp = &rtp . ',' . s:editor_root . '/bundle/Vundle'
-call vundle#begin(s:editor_root . '/bundle')
+
+"Install vundle if not installed
+let vundle_installed=1
+let vundle_readme=s:editor_root . '/bundle/vundle/README.md'
+
+if !filereadable(vundle_readme)
+  echo "Installing Vundle.."
+  echo ""
+  silent call mkdir(s:editor_root . 'bundle', "p")
+  slient execute "!git clone https://github.com/gmarik/vundle " . s:editor_root . "bundle/vundle"
+  let vundle_installed=0
+endif  
+
+let &rtp=&rtp . ',' . s:editor_root . '/bundle/Vundle'
+call vundle#rc(s:editor_root . '/bundle')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -65,7 +78,7 @@ syntax enable
 
 " Set location of pydiction (autocomplete plugin for python) file
 " This _should_ work everywhere
-let g:pydiction_location = '~\vimfiles\bundle\pydiction\complete-dict'
+let g:pydiction_location = s:editor_root . '\pydiction\complete-dict'
 "
 " Hard wrap at 80 for "pandoc" documents plus some "smartyness"
 let g:pandoc#formatting#mode="h"
@@ -81,6 +94,7 @@ autocmd FileType r setlocal tw=80 formatoptions-=t formatoptions+=acqrow
 let vimrplugin_applescript = 0
 " Try to remap _ remapping to ;
 let vimrplugin_assign_map = ";"
+let R_assign_map = ";"
 "let vimrplugin_assign = 0
 
 "
