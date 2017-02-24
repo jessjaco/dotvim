@@ -73,11 +73,11 @@ autocmd FileType python setlocal shiftwidth=4 tabstop=4
 " comment character
 autocmd FileType r setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
 " Use terminal R with vim-r-plugin
-let vimrplugin_applescript = 0
+let R_applescript = 0
 " Try to remap _ remapping to ;
-let vimrplugin_assign_map = ";"
 let R_assign_map = ";"
-let vimrplugin_assign = 0
+"let R_assign = 0 " Turn off '_' to '<-' mapping
+let R_in_buffer = 0
 
 
 " Xml options
@@ -106,12 +106,12 @@ colorscheme jellybeans
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_r_lintr_checker = 0
-let g:syntastic_r_checkers = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_enable_r_lintr_checker = 0
+"let g:syntastic_r_checkers = 0
 
 " Hub specific options
 if hostname() == "CSPHUB"
