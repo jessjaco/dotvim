@@ -61,7 +61,7 @@ syntax enable
 
 " Make options
 " make needs tabs
-autocmd FileType make setlocal noexpandtab shiftwidth=8 softtabstop=0
+autocmd FileType make setlocal noexpandtab softtabstop=0
 
 " python options
 autocmd FileType python setlocal shiftwidth=4 tabstop=4
@@ -70,8 +70,6 @@ autocmd FileType python setlocal shiftwidth=4 tabstop=4
 " Hard wrap comments only at 80 columns, and start the next line with a 
 " comment character
 autocmd FileType r setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
-" Use terminal R with vim-r-plugin
-let R_applescript = 0
 " Try to remap _ remapping to ;
 let R_assign_map = ";"
 "let R_assign = 0 " Turn off '_' to '<-' mapping
