@@ -39,6 +39,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'tpope/vim-surround'
 Plugin 'gabrielelana/vim-markdown'
+Plugin 'tpope/vim-vinegar'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -76,6 +77,13 @@ let R_assign_map = ";"
 "let R_assign = 0 " Turn off '_' to '<-' mapping
 let R_in_buffer = 0
 
+" netrw stuff
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+" Open file in last window (1,2 = new h,v split, 3=new tab)
+let g:netrw_browse_split = 4
+" 25% width
+let g:netrw_winsize = 25
 
 " Pandoc options
 " Hard wrap at 80 for "pandoc" documents plus some "smartyness"
@@ -96,7 +104,6 @@ endfunction
 " Xml options
 " For indenting xml correctly
 map <F2><Esc>:1,$!xmllint --format -<CR>
-
 
 " Set colorscheme, should look fine if terminal is reported as 256 color 
 " To check 'echo $TERM'. Haven't checked windows yet
