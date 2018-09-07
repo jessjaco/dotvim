@@ -21,7 +21,7 @@ if !filereadable(vundle_readme)
   let vundle_installed=0
 endif  
 
-let &rtp=&rtp . ',' . s:editor_root . '/bundle/Vundle'
+let &rtp=&rtp . ',' . s:editor_root . '/bundle/vundle'
 call vundle#rc(s:editor_root . '/bundle')
 
 " let Vundle manage Vundle, required
@@ -40,6 +40,7 @@ Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'tpope/vim-surround'
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'tpope/vim-vinegar'
+Plugin 'ervandew/supertab'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
