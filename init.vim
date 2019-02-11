@@ -41,6 +41,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'tpope/vim-vinegar'
 Plugin 'ervandew/supertab'
+Plugin 'maverickg/stan.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
