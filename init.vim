@@ -28,19 +28,45 @@ call vundle#rc(s:editor_root . '/bundle')
 Plugin 'gmarik/Vundle.vim'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'ervandew/screen'
+
+" linter
+Plugin 'w0rp/ale'
+
+" Markdown tools
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-rmarkdown'
+Plugin 'gabrielelana/vim-markdown'
+
+" Ctrl-P to preview md in browser
+Plugin 'JamshedVesuna/vim-markdown-preview'
+
 Plugin 'godlygeek/tabular'
 Plugin 'sukima/xmledit'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
-Plugin 'JamshedVesuna/vim-markdown-preview'
+
+" *s (s for surroundings)
+" ds' <- removes single quotes 
+" cs'" <- changes single quotes to double
+" ys e.g ysiw) 'you surround' selection (here, iw) with character (here ')')
 Plugin 'tpope/vim-surround'
-Plugin 'gabrielelana/vim-markdown'
-Plugin 'tpope/vim-vinegar'
+
+" Tab completion (not working???)
 Plugin 'ervandew/supertab'
+
+" Homebrew fzf
+set rtp+=/usr/local/opt/fzf
+Plugin 'junegunn/fzf.vim'
+
+" Status line
+Plugin 'itchyny/lightline.vim'
+
+" netrw replacement
+Plugin 'scrooloose/nerdtree'
+
+" HTML macros
+Plugin 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -76,14 +102,6 @@ let R_assign_map = ";"
 "let R_assign = 0 " Turn off '_' to '<-' mapping
 let R_in_buffer = 0
 
-" netrw stuff
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
-" Open file in last window (1,2 = new h,v split, 3=new tab)
-let g:netrw_browse_split = 4
-" 25% width
-let g:netrw_winsize = 25
-
 " Pandoc options
 " Hard wrap at 80 for "pandoc" documents plus some "smartyness"
 let g:pandoc#formatting#mode="h"
@@ -108,19 +126,8 @@ map <F2><Esc>:1,$!xmllint --format -<CR>
 " To check 'echo $TERM'. Haven't checked windows yet
 colorscheme jellybeans
 
-let g:syntastic_javascript_checkers = ['jshint']
-" syntastic recommended settings and lintr recommmended settings
-" Caused some probs with neovim, just check these
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_debug=3
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_enable_r_lintr_checker = 1
-"let g:syntastic_r_checkers = ['lintr']
-"let g:syntastic_r_lintr_linters = 'list("single_quotes_linter", "assignment_linter")'
+" 
+let b:ale_linters = ['jshint']
 
+" toggle file chooser
+map <C-o> :NERDTreeToggle<CR>
