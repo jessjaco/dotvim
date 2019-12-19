@@ -1,6 +1,6 @@
-#Vim Notes
+# Vim Notes
 
-##To get this stuff
+## To get this stuff
 
     git clone https://github.com/blindjesse/dotvim vimfiles
     cd vimfiles
@@ -8,7 +8,7 @@
     # in windows (in %USERPROFILE% dir):
     mklink /H "_vimrc" "vimfiles\vimrc"
 
-##To add plugin
+## To add plugin
 1) Install Vundle (see vundle site; follow git directions if you need git)
   But see updates to init.vim which may install it automatically
 2) add 
