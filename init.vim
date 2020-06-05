@@ -30,7 +30,8 @@ Plugin 'jalvesaq/Nvim-R'
 Plugin 'ervandew/screen'
 
 " linter
-Plugin 'w0rp/ale'
+" Also may need to install specific programs, e.g. jshint
+Plugin 'dense-analysis/ale'
 
 " Markdown tools
 Plugin 'vim-pandoc/vim-pandoc'
@@ -118,17 +119,19 @@ function! ModifyTextWidth()
     endif
 endfunction
 
-
 " Xml options
 " For indenting xml correctly
 map <F2><Esc>:1,$!xmllint --format -<CR>
 
 " Set colorscheme, should look fine if terminal is reported as 256 color 
 " To check 'echo $TERM'. Haven't checked windows yet
+" Makes the background black instead of some kinda gray 
+let g:jellybeans_overrides = { 'background': { 'guibg': '000000' }, }
 colorscheme jellybeans
+highlight ColorColumn term=reverse ctermbg=232 guibg=232
 
 " 
-let b:ale_linters = ['jshint']
+ let b:ale_linters = ['jshint']
 
 " toggle file chooser
 map <C-o> :NERDTreeToggle<CR>
