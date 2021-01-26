@@ -45,6 +45,12 @@ Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'godlygeek/tabular'
 Plugin 'sukima/xmledit'
 Plugin 'flazz/vim-colorschemes'
+
+" Python
+Plugin 'numirias/semshi'
+Plugin 'Vimjas/vim-python-pep8-indent'
+
+" Javascript specific stuff
 Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
 
@@ -135,8 +141,12 @@ let g:jellybeans_overrides = { 'background': { 'guibg': '000000' }, }
 colorscheme jellybeans
 highlight ColorColumn term=reverse ctermbg=232 guibg=232
 
-" 
- let b:ale_linters = ['jshint']
+" All of these need to be installed on your system. 
+"
+" If you don't like pylint's error about constants not being UPPERCASE,
+" generate ~/.pylintrc via pyline --generate-rcfile > ~/.pylintrc then read
+" through it. 
+let b:ale_linters = ['jshint', 'flake8', 'pylint']
 
 " toggle file chooser
 map <C-o> :NERDTreeToggle<CR>
