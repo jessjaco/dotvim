@@ -46,6 +46,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'sukima/xmledit'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'pangloss/vim-javascript'
+Plugin 'maxmellon/vim-jsx-pretty'
 
 " *s (s for surroundings)
 " ds' <- removes single quotes 
@@ -87,6 +88,10 @@ set nohlsearch " Turn off annoying highlighting when searching
 
 " enable syntax highlighting
 syntax enable
+
+" turn titlebar on and have display current working directory
+set title
+set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 
 " Make options
 " make needs tabs
