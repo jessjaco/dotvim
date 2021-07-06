@@ -62,6 +62,9 @@ Plugin 'tpope/vim-surround'
 
 " Tab completion (not working???)
 Plugin 'ervandew/supertab'
+Plugin 'davidhalter/jedi-vim'
+
+" For stan
 Plugin 'maverickg/stan.vim'
 
 " Homebrew fzf
@@ -121,6 +124,9 @@ let g:pandoc#formatting#mode="h"
 let g:pandoc#spell#enabled=0
 " lets inline r commands in rmd files extend lines.
 au CursorMovedI *.rmd call ModifyTextWidth() " Use only within *.md files
+
+" for markdown plugin (not using pandoc, at least for now)
+autocmd FileType markdown setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
 
 function! ModifyTextWidth()
     if getline(".")=~'^.*`r.*$' 
