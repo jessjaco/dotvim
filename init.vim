@@ -49,6 +49,7 @@ Plugin 'flazz/vim-colorschemes'
 " Python
 Plugin 'numirias/semshi'
 Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'ambv/black'
 
 " Javascript specific stuff
 Plugin 'pangloss/vim-javascript'
@@ -152,7 +153,14 @@ highlight ColorColumn term=reverse ctermbg=232 guibg=232
 " If you don't like pylint's error about constants not being UPPERCASE,
 " generate ~/.pylintrc via pyline --generate-rcfile > ~/.pylintrc then read
 " through it. 
-let b:ale_linters = ['jshint', 'flake8', 'pylint']
+"
+" pylint requires pyline python package
+" mypy requires mypy python package
+let b:ale_linters = ['jshint', 'flake8', 'pylint', 'mypy', 'lintr', 'yamllint']
+"
+" black requires black python package
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['black'] }
+let g:ale_fix_on_save = 1
 
 " toggle file chooser
 map <C-o> :NERDTreeToggle<CR>
