@@ -103,6 +103,15 @@ syntax enable
 set title
 set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 
+
+" CSS
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS " turn on native completion
+autocmd FileType css let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
+" HTMl
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags " turn on native completion
+autocmd FileType html let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
 " Make options
 " make needs tabs
 autocmd FileType make setlocal noexpandtab softtabstop=0
