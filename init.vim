@@ -7,7 +7,7 @@ if has('nvim')
   let s:editor_root=expand('~/.config/nvim')
 else
   let s:editor_root=expand('~/vimfiles')
-endif  
+endif
 
 "Install vundle if not installed
 let vundle_installed=1
@@ -19,7 +19,7 @@ if !filereadable(vundle_readme)
   silent call mkdir(s:editor_root . 'bundle', "p")
   silent execute "!git clone https://github.com/gmarik/vundle " . s:editor_root . "/bundle/vundle"
   let vundle_installed=0
-endif  
+endif
 
 let &rtp=&rtp . ',' . s:editor_root . '/bundle/vundle'
 call vundle#rc(s:editor_root . '/bundle')
@@ -56,7 +56,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
 
 " *s (s for surroundings)
-" ds' <- removes single quotes 
+" ds' <- removes single quotes
 " cs'" <- changes single quotes to double
 " ys e.g ysiw) 'you surround' selection (here, iw) with character (here ')')
 Plugin 'tpope/vim-surround'
@@ -91,7 +91,7 @@ set shiftwidth=2 " Number of spaces for each level of indent
 set expandtab " Use spaces when you press tab
 set tabstop=2 " Number of spaces for each tab
 set smarttab " Not sure, was in sensible.vim
-set ruler " Tells us where the cursor is 
+set ruler " Tells us where the cursor is
 set wildmenu " Helps with wildcard expansion
 set cc=80 " Make column 80 red
 set nohlsearch " Turn off annoying highlighting when searching
@@ -111,7 +111,7 @@ autocmd FileType make setlocal noexpandtab softtabstop=0
 autocmd FileType python setlocal shiftwidth=4 tabstop=4
 
 " R options
-" Hard wrap comments only at 80 columns, and start the next line with a 
+" Hard wrap comments only at 80 columns, and start the next line with a
 " comment character
 autocmd FileType r setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
 " Try to remap _ remapping to ;
@@ -130,7 +130,7 @@ au CursorMovedI *.rmd call ModifyTextWidth() " Use only within *.md files
 autocmd FileType markdown setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
 
 function! ModifyTextWidth()
-    if getline(".")=~'^.*`r.*$' 
+    if getline(".")=~'^.*`r.*$'
         setlocal textwidth=500
     else
         setlocal textwidth=80 " Otherwise use normal textwidth
@@ -141,25 +141,28 @@ endfunction
 " For indenting xml correctly
 map <F2><Esc>:1,$!xmllint --format -<CR>
 
-" Set colorscheme, should look fine if terminal is reported as 256 color 
+" Set colorscheme, should look fine if terminal is reported as 256 color
 " To check 'echo $TERM'. Haven't checked windows yet
-" Makes the background black instead of some kinda gray 
+" Makes the background black instead of some kinda gray
 let g:jellybeans_overrides = { 'background': { 'guibg': '000000' }, }
 colorscheme jellybeans
 highlight ColorColumn term=reverse ctermbg=232 guibg=232
 
-" All of these need to be installed on your system. 
+" All of these need to be installed on your system.
 "
 " If you don't like pylint's error about constants not being UPPERCASE,
 " generate ~/.pylintrc via pyline --generate-rcfile > ~/.pylintrc then read
-" through it. 
+" through it.
 "
 " pylint requires pyline python package
 " mypy requires mypy python package
+" lintr requires lintr R package
 let b:ale_linters = ['jshint', 'flake8', 'pylint', 'mypy', 'lintr', 'yamllint']
+let g:ale_python_flake8_options = '--max-line-length=88'
+
 "
 " black requires black python package
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['black'] }
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['black'], 'r': ['styler'], 'javascript': ['prettier'], 'html': ['prettier'] }
 let g:ale_fix_on_save = 1
 
 " toggle file chooser
