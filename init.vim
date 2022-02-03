@@ -62,8 +62,8 @@ Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'tpope/vim-surround'
 
 " Tab completion (not working???)
-Plugin 'ervandew/supertab'
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'ervandew/supertab'
+" Plugin 'davidhalter/jedi-vim'
 
 " For stan
 Plugin 'maverickg/stan.vim'
@@ -171,6 +171,8 @@ let g:ale_python_flake8_options = '--max-line-length=88'
 
 "
 " black requires black python package
+" styler required styler R package
+" prettier requires prettier node package
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['black'], 'r': ['styler'], 'javascript': ['prettier'], 'html': ['prettier'] }
 let g:ale_fix_on_save = 1
 
