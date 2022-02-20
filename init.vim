@@ -49,7 +49,10 @@ Plugin 'flazz/vim-colorschemes'
 " Python
 Plugin 'numirias/semshi'
 Plugin 'Vimjas/vim-python-pep8-indent'
+" Needs black python package (see ale section)
 Plugin 'ambv/black'
+" To edit ipynb files, needs jupytext python package
+Plugin 'goerz/jupytext.vim'
 
 " Javascript specific stuff
 Plugin 'pangloss/vim-javascript'
@@ -80,6 +83,9 @@ Plugin 'scrooloose/nerdtree'
 
 " HTML macros
 Plugin 'mattn/emmet-vim'
+
+" Recognize nunjucks, among others
+Plugin 'lepture/vim-jinja'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -173,7 +179,9 @@ let g:ale_python_flake8_options = '--max-line-length=88'
 " black requires black python package
 " styler required styler R package
 " prettier requires prettier node package
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['black'], 'r': ['styler'], 'javascript': ['prettier'], 'html': ['prettier'] }
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'python': ['black'], 'r': ['styler'], 'javascript': ['prettier'],
+  \ 'html': ['prettier'], 'jinja': ['prettier'] }
 let g:ale_fix_on_save = 1
 
 " toggle file chooser
