@@ -173,9 +173,12 @@ let g:ale_fix_on_save = 1
 
 " See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 let g:coc_global_extensions = [
-  \'coc-css', 'coc-html', 'coc-html-css-support',
+  \'coc-css', 'coc-html', 'coc-html-css-support', 'coc-json',
   \ 'coc-pyright', 'coc-r-lsp'
   \ ]
 
 " toggle file chooser
 map <C-o> :NERDTreeToggle<CR>
+
+" Support comments in json
+autocmd FileType json syntax match Comment +\/\/.\+$+
