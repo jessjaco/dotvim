@@ -1,95 +1,82 @@
 set nocompatible
-" Turn off filetype until Vundle is initialized
-filetype off
 
-" set the runtime path to include Vundle and initialize
-if has('nvim')
-  let s:editor_root=expand('~/.config/nvim')
-else
-  let s:editor_root=expand('~/vimfiles')
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+"  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+"       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-"Install vundle if not installed
-let vundle_installed=1
-let vundle_readme=s:editor_root . '/bundle/vundle/README.md'
-
-if !filereadable(vundle_readme)
-  echo "Installing Vundle.."
-  echo ""
-  silent call mkdir(s:editor_root . 'bundle', "p")
-  silent execute "!git clone https://github.com/gmarik/vundle " . s:editor_root . "/bundle/vundle"
-  let vundle_installed=0
-endif
-
-let &rtp=&rtp . ',' . s:editor_root . '/bundle/vundle'
-call vundle#rc(s:editor_root . '/bundle')
+call plug#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'jalvesaq/Nvim-R'
-Plugin 'ervandew/screen'
+Plug 'jalvesaq/Nvim-R'
+Plug 'ervandew/screen'
 
 " linter
 " Also may need to install specific programs, e.g. jshint
-Plugin 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Markdown tools
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'vim-pandoc/vim-rmarkdown'
-Plugin 'gabrielelana/vim-markdown'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-rmarkdown'
+Plug 'gabrielelana/vim-markdown'
 
 " Ctrl-P to preview md in browser
-Plugin 'JamshedVesuna/vim-markdown-preview'
+Plug 'JamshedVesuna/vim-markdown-preview'
 
-Plugin 'godlygeek/tabular'
-Plugin 'sukima/xmledit'
-Plugin 'flazz/vim-colorschemes'
+Plug 'godlygeek/tabular'
+Plug 'sukima/xmledit'
+Plug 'flazz/vim-colorschemes'
 
 " Python
-Plugin 'numirias/semshi'
-Plugin 'Vimjas/vim-python-pep8-indent'
+" Semantic highlighting (if having issues, then run :UpdateRemotePlugins)
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+Plug 'Vimjas/vim-python-pep8-indent'
 " Needs black python package (see ale section)
-Plugin 'ambv/black'
+Plug 'ambv/black'
 " To edit ipynb files, needs jupytext python package
-Plugin 'goerz/jupytext.vim'
+Plug 'goerz/jupytext.vim'
 
 " Javascript specific stuff
-Plugin 'pangloss/vim-javascript'
-Plugin 'maxmellon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 
 " *s (s for surroundings)
 " ds' <- removes single quotes
 " cs'" <- changes single quotes to double
 " ys e.g ysiw) 'you surround' selection (here, iw) with character (here ')')
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " Tab completion (not working???)
-" Plugin 'ervandew/supertab'
-" Plugin 'davidhalter/jedi-vim'
+" Plug 'ervandew/supertab'
+" Plug 'davidhalter/jedi-vim'
 
 " For stan
-Plugin 'maverickg/stan.vim'
+Plug 'maverickg/stan.vim'
 
 " Homebrew fzf
 set rtp+=/usr/local/opt/fzf
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 
 " Status line
-Plugin 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 " netrw replacement
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " HTML macros
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 
 " Recognize nunjucks, among others
-Plugin 'lepture/vim-jinja'
+Plug 'lepture/vim-jinja'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 " Global options
 set showcmd "Show partial command in status line
@@ -108,7 +95,6 @@ syntax enable
 " turn titlebar on and have display current working directory
 set title
 set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
-
 
 " CSS
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS " turn on native completion
@@ -131,7 +117,6 @@ autocmd FileType python setlocal shiftwidth=4 tabstop=4
 autocmd FileType r setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
 " Try to remap _ remapping to ;
 let R_assign_map = ";"
-"let R_assign = 0 " Turn off '_' to '<-' mapping
 let R_in_buffer = 0
 
 " Pandoc options
@@ -179,10 +164,18 @@ let g:ale_python_flake8_options = '--max-line-length=88'
 " black requires black python package
 " styler required styler R package
 " prettier requires prettier node package
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'],
+let g:ale_fixers = {
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
   \ 'python': ['black'], 'r': ['styler'], 'javascript': ['prettier'],
-  \ 'html': ['prettier'], 'jinja': ['prettier'] }
+  \ 'html': ['prettier'], 'jinja': ['prettier']
+  \ }
 let g:ale_fix_on_save = 1
+
+" See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+let g:coc_global_extensions = [
+  \'coc-css', 'coc-html', 'coc-html-css-support',
+  \ 'coc-pyright', 'coc-r-lsp'
+  \ ]
 
 " toggle file chooser
 map <C-o> :NERDTreeToggle<CR>
