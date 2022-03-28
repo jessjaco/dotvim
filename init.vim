@@ -2,8 +2,6 @@ set nocompatible
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
-"  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-"       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -73,7 +71,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'mattn/emmet-vim'
 
 " Recognize nunjucks, among others
-Plug 'lepture/vim-jinja'
+" Disabled, because spell-check didn't like it
+" Plug 'lepture/vim-jinja'
+
+" Plug 'github/copilot.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -97,12 +98,12 @@ set title
 set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 
 " CSS
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS " turn on native completion
-autocmd FileType css let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+" autocmd FileType css set omnifunc=csscomplete#CompleteCSS " turn on native completion
+" autocmd FileType css let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " HTMl
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags " turn on native completion
-autocmd FileType html let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags " turn on native completion
+" autocmd FileType html let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " Make options
 " make needs tabs
@@ -167,18 +168,28 @@ let g:ale_python_flake8_options = '--max-line-length=88'
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
   \ 'python': ['black'], 'r': ['styler'], 'javascript': ['prettier'],
-  \ 'html': ['prettier'], 'jinja': ['prettier']
+  \ 'html': ['prettier'], 'jinja': ['prettier'], 'css': ['prettier']
   \ }
 let g:ale_fix_on_save = 1
 
+
+" Coc stuff
 " See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 let g:coc_global_extensions = [
   \'coc-css', 'coc-html', 'coc-html-css-support', 'coc-json',
-  \ 'coc-pyright', 'coc-r-lsp'
+  \ 'coc-pyright', 'coc-spell-checker'
   \ ]
+
+" From coc-spell-checker, maybe global?
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 
 " toggle file chooser
 map <C-o> :NERDTreeToggle<CR>
 
 " Support comments in json
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" Set ft for njk files (there's a plugin for this, but it sets them
+" to jinja.html, which coc-spell doesn't like)
+au BufRead,BufNewFile *.njk set filetype=html
