@@ -94,7 +94,8 @@ endif
 " See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 let g:coc_global_extensions = [
   \ 'coc-css', 'coc-html', 'coc-html-css-support', 'coc-json',
-  \ 'coc-pyright', 'coc-spell-checker', 'coc-r-lsp', 'coc-prettier'
+  \ 'coc-pyright', 'coc-spell-checker', 'coc-r-lsp', 'coc-prettier',
+  \ 'coc-emmet'
   \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -248,6 +249,14 @@ syntax enable " enable syntax highlighting
 " turn titlebar on and have display current working directory
 set title
 set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
+
+" emmet.vim extend to jsx, tsx
+let g:user_emmet_settings = {
+\ 'javascript' : { 'extends' : 'jsx' },
+\ 'typescript': { 'extends': 'tsx' }
+\}
+
+let g:jsx_ext_required = 0
 
 " Statusline setup (note cocstatus stuff)
 let g:lightline = {
