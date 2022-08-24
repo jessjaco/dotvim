@@ -1,4 +1,8 @@
 {
+  "coc.preferences.willSaveHandlerTimeout": 2000,
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "r", "python"],
+  "python.formatting.provider":"black", 
+  "cSpell.showStatus": true,
   "cSpell.userWords": [
     "AUTOTUNE",
     "Colab",
@@ -39,39 +43,9 @@
     "ymin"
   ],
   "cSpell.enabledLanguageIds": [
-    "asciidoc",
-    "c",
-    "cpp",
-    "csharp",
-    "css",
-    "git-commit",
-    "go",
-    "handlebars",
-    "haskell",
     "html",
-    "jade",
-    "java",
-    "javascript",
-    "javascriptreact",
-    "jinja.html",
-    "json",
-    "jsonc",
-    "latex",
-    "less",
     "markdown",
-    "php",
     "plaintext",
-    "pug",
-    "restructuredtext",
-    "rust",
-    "scala",
-    "scss",
-    "text",
-    "typescript",
-    "typescriptreact",
-    "vim",
-    "yaml",
-    "yml"
-  ],
-  "cSpell.showStatus": true
+    "text"
+  ]
 }

@@ -8,18 +8,18 @@ endif
 
 call plug#begin()
 
-Plug 'ervandew/screen'
+" Plug 'ervandew/screen'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Markdown tools
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-rmarkdown'
-Plug 'gabrielelana/vim-markdown'
+" Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-rmarkdown'
+" Plug 'gabrielelana/vim-markdown'
 
 " Ctrl-P to preview md in browser
-Plug 'JamshedVesuna/vim-markdown-preview'
+" Plug 'JamshedVesuna/vim-markdown-preview'
 
 Plug 'godlygeek/tabular'
 Plug 'sukima/xmledit'
@@ -39,7 +39,7 @@ Plug 'tpope/vim-surround'
 " Plug 'junegunn/fzf.vim'
 
 " Status line
-" Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 " netrw replacement
 Plug 'scrooloose/nerdtree'
@@ -51,11 +51,10 @@ Plug 'mattn/emmet-vim'
 " Disabled, because spell-check didn't like it
 " Plug 'lepture/vim-jinja'
 
-" Plug 'github/copilot.vim'
-
 " All of your Plugins must be added before the following line
 call plug#end()
 
+" Coc stuff is first
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
@@ -64,15 +63,17 @@ set encoding=utf-8
 " TextEdit might fail if hidden is not set.
 set hidden
 
-" Some servers have issues with backup files, see #649.
+" Some servers have issues with backup files
 set nobackup
 set nowritebackup
 
-" Give more space for displaying messages.
-set cmdheight=2
+" Give more space for messages
+" set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
+" Note that this does not apply to certain settings of coc.nvim, for instance
+" see coc.preferences.willSaveHandlerTimeout.
 set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
@@ -87,13 +88,19 @@ else
   set signcolumn=yes
 endif
 
+" See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+let g:coc_global_extensions = [
+  \ 'coc-css', 'coc-html', 'coc-html-css-support', 'coc-json',
+  \ 'coc-pyright', 'coc-spell-checker', 'coc-r-lsp', 'coc-prettier'
+  \ ]
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+    \ coc#pum#visible() ? coc#pum#next(1):
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -110,8 +117,8 @@ endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() 
+      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -203,11 +210,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Mappings for CoCList
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -228,25 +230,36 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>n
 
 
 " Global options
-set showcmd "Show partial command in status line
+" set showcmd "Show partial command in status line
 set shiftwidth=2 " Number of spaces for each level of indent
 set expandtab " Use spaces when you press tab
 set tabstop=2 " Number of spaces for each tab
 set smarttab " Not sure, was in sensible.vim
 set ruler " Tells us where the cursor is
 set wildmenu " Helps with wildcard expansion
-set cc=80 " Make column 80 red
-set nohlsearch " Turn off annoying highlighting when searching
+set cc=80 " Make column 80 a different color
+" set nohlsearch " Turn off annoying highlighting when searching
 
-
-" enable syntax highlighting
-syntax enable
+syntax enable " enable syntax highlighting
 
 " turn titlebar on and have display current working directory
 set title
 set titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}
 
-" Make options
+" Statusline setup (note cocstatus stuff)
+let g:lightline = {
+\ 'active': {
+\   'left': [ [ 'mode', 'paste' ],
+\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+\   },
+\ 'component_function': { 'cocstatus': 'coc#status' },
+\ }
+
+" Use autocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+" Format specific stuff
+
 " make needs tabs
 autocmd FileType make setlocal noexpandtab softtabstop=0
 
@@ -268,9 +281,6 @@ let g:pandoc#spell#enabled=0
 " lets inline r commands in rmd files extend lines.
 au CursorMovedI *.rmd call ModifyTextWidth() " Use only within *.md files
 
-" for markdown plugin (not using pandoc, at least for now)
-autocmd FileType markdown setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
-
 function! ModifyTextWidth()
     if getline(".")=~'^.*`r.*$'
         setlocal textwidth=500
@@ -278,6 +288,9 @@ function! ModifyTextWidth()
         setlocal textwidth=80 " Otherwise use normal textwidth
     endif
 endfunction
+
+" for markdown plugin (not using pandoc, at least for now)
+autocmd FileType markdown setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
 
 " Xml options
 " For indenting xml correctly
@@ -289,13 +302,6 @@ map <F2><Esc>:1,$!xmllint --format -<CR>
 let g:jellybeans_overrides = { 'background': { 'guibg': '000000' }, }
 colorscheme jellybeans
 highlight ColorColumn term=reverse ctermbg=232 guibg=232
-
-" Coc stuff
-" See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-let g:coc_global_extensions = [
-  \'coc-css', 'coc-html', 'coc-html-css-support', 'coc-json',
-  \ 'coc-pyright', 'coc-spell-checker'
-  \ ]
 
 " toggle file chooser
 map <C-o> :NERDTreeToggle<CR>
