@@ -12,15 +12,6 @@ call plug#begin()
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Markdown tools
-" Plug 'vim-pandoc/vim-pandoc'
-" Plug 'vim-pandoc/vim-pandoc-syntax'
-" Plug 'vim-pandoc/vim-rmarkdown'
-" Plug 'gabrielelana/vim-markdown'
-
-" Ctrl-P to preview md in browser
-" Plug 'JamshedVesuna/vim-markdown-preview'
-
 Plug 'godlygeek/tabular'
 Plug 'sukima/xmledit'
 Plug 'flazz/vim-colorschemes'
@@ -38,6 +29,9 @@ Plug 'tpope/vim-surround'
 "set rtp+=/usr/local/opt/fzf
 " Plug 'junegunn/fzf.vim'
 
+" Enhancements for % functionality
+Plug 'andymass/vim-matchup'
+
 " Status line
 Plug 'itchyny/lightline.vim'
 
@@ -46,6 +40,15 @@ Plug 'scrooloose/nerdtree'
 
 " HTML macros
 Plug 'mattn/emmet-vim'
+
+" Markdown tools Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-rmarkdown'
+" Plug 'gabrielelana/vim-markdown'
+
+" Ctrl-P to preview md in browser
+" Plug 'JamshedVesuna/vim-markdown-preview'
+
 
 " Recognize nunjucks, among others
 " Disabled, because spell-check didn't like it
