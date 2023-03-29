@@ -70,9 +70,6 @@ set hidden
 set nobackup
 set nowritebackup
 
-" Give more space for messages
-" set cmdheight=2
-
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 " Note that this does not apply to certain settings of coc.nvim, for instance
@@ -95,7 +92,7 @@ endif
 let g:coc_global_extensions = [
   \ 'coc-css', 'coc-html', 'coc-html-css-support', 'coc-json',
   \ 'coc-pyright', 'coc-spell-checker', 'coc-r-lsp', 'coc-prettier',
-  \ 'coc-emmet'
+  \ 'coc-emmet', 'coc-sql', 'coc-julia', 'coc-yaml', 'coc-eslint'
   \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -242,7 +239,7 @@ set smarttab " Not sure, was in sensible.vim
 set ruler " Tells us where the cursor is
 set wildmenu " Helps with wildcard expansion
 set cc=80 " Make column 80 a different color
-" set nohlsearch " Turn off annoying highlighting when searching
+set nohlsearch " Turn off annoying highlighting when searching
 
 syntax enable " enable syntax highlighting
 
@@ -262,7 +259,7 @@ let g:jsx_ext_required = 0
 let g:lightline = {
 \ 'active': {
 \   'left': [ [ 'mode', 'paste' ],
-\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+\             [ 'cocstatus', 'readonly', 'relativepath', 'modified' ] ]
 \   },
 \ 'component_function': { 'cocstatus': 'coc#status' },
 \ }
@@ -282,9 +279,10 @@ autocmd FileType python setlocal shiftwidth=4 tabstop=4
 " Hard wrap comments only at 80 columns, and start the next line with a
 " comment character
 autocmd FileType r setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
+autocmd FileType r inoremap ; <space><-<space>
 " Try to remap _ remapping to ;
-let R_assign_map = ";"
-let R_in_buffer = 0
+" let R_assign_map = ";"
+"let R_in_buffer = 0
 
 " Pandoc options
 " Hard wrap at 80 for "pandoc" documents plus some "smartyness"
@@ -302,7 +300,7 @@ function! ModifyTextWidth()
 endfunction
 
 " for markdown plugin (not using pandoc, at least for now)
-autocmd FileType markdown setlocal tw=80 formatoptions-=t formatoptions+=arqrwj
+autocmd FileType markdown setlocal tw=80 formatoptions+=arqrwjt
 
 " Xml options
 " For indenting xml correctly
@@ -318,9 +316,14 @@ highlight ColorColumn term=reverse ctermbg=232 guibg=232
 " toggle file chooser
 map <C-o> :NERDTreeToggle<CR>
 
-" Support comments in json
-autocmd FileType json syntax match Comment +\/\/.\+$+
+" Support comments in json by changing ft to jsonc
+augroup JsonToJsonc
+    autocmd! FileType json set filetype=jsonc
+augroup END
 
 " Set ft for njk files (there's a plugin for this, but it sets them
 " to jinja.html, which coc-spell doesn't like)
 au BufRead,BufNewFile *.njk set filetype=html
+
+" Set ft for .pyt files (esri toolboxes) to python.
+au BufRead,BufNewFile *.pyt set filetype=python
