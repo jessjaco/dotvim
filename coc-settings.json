@@ -60,5 +60,6 @@
     "ymax",
     "ymin"
   ],
-  "cSpell.enabledLanguageIds": ["html", "markdown", "plaintext", "text"]
+  "cSpell.enabledLanguageIds": ["html", "markdown", "plaintext", "text"],
+  "inlayHint.enable": false
 }
