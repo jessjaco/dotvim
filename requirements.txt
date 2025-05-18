@@ -1,0 +1,2 @@
+neovim
+fortran-language-server

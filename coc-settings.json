@@ -1,4 +1,11 @@
 {
+  "languageserver": {
+    "fortran": {
+      "command": "fortran-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["fortran", "f90", "f95", "f03", "f08"]
+    }
+  },
   "coc.preferences.willSaveHandlerTimeout": 2000,
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
