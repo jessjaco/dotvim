@@ -1,9 +1,16 @@
 {
   "languageserver": {
     "fortran": {
-      "command": "fortran-language-server",
-      "args": ["--stdio"],
-      "filetypes": ["fortran", "f90", "f95", "f03", "f08"]
+      "command": "fortls",
+      "args": [
+        "--notify_init",
+        "--hover_signature",
+        "--hover_language=fortran",
+        "--use_signature_help"
+      ],
+      "filetypes": ["fortran", "f90", "f95", "f03", "f08"],
+      "rootPatterns": [".git/"],
+      "trace.server": "verbose"
     }
   },
   "coc.preferences.willSaveHandlerTimeout": 2000,

@@ -15,7 +15,6 @@ return {
     require("neo-tree").setup({
       -- your neo-tree config (if any)
     })
-    vim.keymap.set('n', '<C-n>', ':Neotree toggle<CR>', { noremap = true, silent = true })
   end,
 }
 }
