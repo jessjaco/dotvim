@@ -13,6 +13,7 @@
       "trace.server": "verbose"
     }
   },
+  "Lua.diagnostics.globals": ["vim"],
   "coc.preferences.willSaveHandlerTimeout": 2000,
   "inlayHint.enable": false,
   "[css][markdown][r][python][typescriptreact][json][jsonc][lua]": {
@@ -21,5 +22,7 @@
   "python.analysis.diagnosticSeverityOverrides": {
     "reportPrivateImportUsage": "none"
   },
-  "python.formatting.provider": "black"
+  "python.formatting.provider": "black",
+  "pyright.testing.provider": "pytest",
+  "pyright.organizeimports.provider": "ruff"
 }

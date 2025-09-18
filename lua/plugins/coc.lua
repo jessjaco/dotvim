@@ -7,18 +7,18 @@ return {
     config = function()
       vim.g.coc_global_extensions = {
         "coc-css",
+        "coc-emmet",
+        "coc-eslint",
         "coc-html",
         "coc-html-css-support",
         "coc-json",
+        "coc-julia",
+        "coc-lua",
+        "coc-prettier",
         "coc-pyright",
         "coc-r-lsp",
-        "coc-prettier",
-        "coc-emmet",
         "coc-sql",
-        "coc-julia",
         "coc-yaml",
-        "coc-eslint",
-        "coc-lua"
       }
 
       -- Below from
@@ -175,7 +175,8 @@ return {
       vim.api.nvim_create_user_command("Fold", "call CocAction('fold', <f-args>)", { nargs = '?' })
 
       -- Add `:OR` command for organize imports of the current buffer
-      vim.api.nvim_create_user_command("OR", "call CocActionAsync('runCommand', 'editor.action.organizeImport')", {})
+      vim.api.nvim_create_user_command("OI", "call CocActionAsync('runCommand', 'editor.action.organizeImport')", {})
+      keyset("n", "<leader>si", ":OI<CR>", opts)
 
       -- Add (Neo)Vim's native statusline support
       -- NOTE: Please see `:h coc-status` for integrations with external plugins that
@@ -187,21 +188,21 @@ return {
       ---@diagnostic disable-next-line: redefined-local
       local opts = { silent = true, nowait = true }
       -- Show all diagnostics
-      keyset("n", "<space>a", ":<C-u>CocList diagnostics<cr>", opts)
+      keyset("n", "<leader>a", ":<C-u>CocList diagnostics<cr>", opts)
       -- Manage extensions
-      keyset("n", "<space>e", ":<C-u>CocList extensions<cr>", opts)
+      keyset("n", "<leader>e", ":<C-u>CocList extensions<cr>", opts)
       -- Show commands
-      keyset("n", "<space>c", ":<C-u>CocList commands<cr>", opts)
+      keyset("n", "<leader>c", ":<C-u>CocList commands<cr>", opts)
       -- Find symbol of current document
-      keyset("n", "<space>o", ":<C-u>CocList outline<cr>", opts)
+      keyset("n", "<leader>o", ":<C-u>CocList outline<cr>", opts)
       -- Search workspace symbols
-      keyset("n", "<space>s", ":<C-u>CocList -I symbols<cr>", opts)
+      keyset("n", "<leader>s", ":<C-u>CocList -I symbols<cr>", opts)
       -- Do default action for next item
-      keyset("n", "<space>j", ":<C-u>CocNext<cr>", opts)
+      keyset("n", "<leader>j", ":<C-u>CocNext<cr>", opts)
       -- Do default action for previous item
-      keyset("n", "<space>k", ":<C-u>CocPrev<cr>", opts)
+      keyset("n", "<leader>k", ":<C-u>CocPrev<cr>", opts)
       -- Resume latest coc list
-      keyset("n", "<space>p", ":<C-u>CocListResume<cr>", opts)
+      keyset("n", "<leader>p", ":<C-u>CocListResume<cr>", opts)
     end
   },
 }
