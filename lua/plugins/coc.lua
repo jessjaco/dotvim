@@ -196,7 +196,7 @@ return {
       -- Find symbol of current document
       keyset("n", "<leader>o", ":<C-u>CocList outline<cr>", opts)
       -- Search workspace symbols
-      keyset("n", "<leader>s", ":<C-u>CocList -I symbols<cr>", opts)
+      -- keyset("n", "<leader>s", ":<C-u>CocList -I symbols<cr>", opts)
       -- Do default action for next item
       keyset("n", "<leader>j", ":<C-u>CocNext<cr>", opts)
       -- Do default action for previous item

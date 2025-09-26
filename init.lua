@@ -20,10 +20,9 @@ local config_dir = vim.fn.stdpath("config")
 vim.g.python3_host_prog = config_dir .. "/venv/bin/python"
 
 -- Key maps
-vim.keymap.set(
-  'n', '<C-n>', ':Neotree toggle<CR>',
-  { noremap = true, silent = true }
-)
+local keyset = vim.keymap.set
+keyset('n', '<C-n>', ':Neotree toggle<CR>', { noremap = true, silent = true })
+keyset('n', '<C-l>', ':Neotree buffers toggle<CR>', { noremap = true, silent = true })
 
 -- Write docstring for function signature at current line
 vim.keymap.set(
