@@ -57,11 +57,6 @@ return {
       -- <C-g>u breaks current undo, please make your own choice
       keyset("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
 
-      -- Use <c-j> to trigger snippets
-      keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
-      -- Use <c-space> to trigger completion
-      keyset("i", "<c-space>", "coc#refresh()", { silent = true, expr = true })
-
       -- Use `[g` and `]g` to navigate diagnostics
       -- Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
       keyset("n", "[g", "<Plug>(coc-diagnostic-prev)", { silent = true })
@@ -101,7 +96,6 @@ return {
       -- Symbol renaming
       keyset("n", "<leader>rn", "<Plug>(coc-rename)", { silent = true })
 
-
       -- Formatting selected code
       keyset("x", "<leader>f", "<Plug>(coc-format-selected)", { silent = true })
       keyset("n", "<leader>f", "<Plug>(coc-format-selected)", { silent = true })
@@ -117,7 +111,7 @@ return {
 
       -- Apply codeAction to the selected region
       -- Example: `<leader>aap` for current paragraph
-      local opts = { silent = true, nowait = true }
+      opts = { silent = true, nowait = true }
       keyset("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
       keyset("n", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
 
@@ -137,18 +131,6 @@ return {
       keyset("n", "<leader>cl", "<Plug>(coc-codelens-action)", opts)
 
 
-      -- Map function and class text objects
-      -- NOTE: Requires 'textDocument.documentSymbol' support from the language server
-      keyset("x", "if", "<Plug>(coc-funcobj-i)", opts)
-      keyset("o", "if", "<Plug>(coc-funcobj-i)", opts)
-      keyset("x", "af", "<Plug>(coc-funcobj-a)", opts)
-      keyset("o", "af", "<Plug>(coc-funcobj-a)", opts)
-      keyset("x", "ic", "<Plug>(coc-classobj-i)", opts)
-      keyset("o", "ic", "<Plug>(coc-classobj-i)", opts)
-      keyset("x", "ac", "<Plug>(coc-classobj-a)", opts)
-      keyset("o", "ac", "<Plug>(coc-classobj-a)", opts)
-
-
       -- Remap <C-f> and <C-b> to scroll float windows/popups
       ---@diagnostic disable-next-line: redefined-local
       local opts = { silent = true, nowait = true, expr = true }
@@ -161,27 +143,9 @@ return {
       keyset("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
       keyset("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
 
-
-      -- Use CTRL-S for selections ranges
-      -- Requires 'textDocument/selectionRange' support of language server
-      keyset("n", "<C-s>", "<Plug>(coc-range-select)", { silent = true })
-      keyset("x", "<C-s>", "<Plug>(coc-range-select)", { silent = true })
-
-
-      -- Add `:Format` command to format current buffer
-      vim.api.nvim_create_user_command("Format", "call CocAction('format')", {})
-
-      -- " Add `:Fold` command to fold current buffer
-      vim.api.nvim_create_user_command("Fold", "call CocAction('fold', <f-args>)", { nargs = '?' })
-
       -- Add `:OR` command for organize imports of the current buffer
       vim.api.nvim_create_user_command("OI", "call CocActionAsync('runCommand', 'editor.action.organizeImport')", {})
-      keyset("n", "<leader>si", ":OI<CR>", opts)
-
-      -- Add (Neo)Vim's native statusline support
-      -- NOTE: Please see `:h coc-status` for integrations with external plugins that
-      -- provide custom statusline: lightline.vim, vim-airline
-      vim.opt.statusline:prepend("%{coc#status()}%{get(b:,'coc_current_function','')}")
+      keyset("n", "<leader>si", "<cmd>OI<CR>", opts)
 
       -- Mappings for CoCList
       -- code actions and coc stuff
@@ -189,14 +153,10 @@ return {
       local opts = { silent = true, nowait = true }
       -- Show all diagnostics
       keyset("n", "<leader>a", ":<C-u>CocList diagnostics<cr>", opts)
-      -- Manage extensions
-      keyset("n", "<leader>e", ":<C-u>CocList extensions<cr>", opts)
       -- Show commands
       keyset("n", "<leader>c", ":<C-u>CocList commands<cr>", opts)
       -- Find symbol of current document
       keyset("n", "<leader>o", ":<C-u>CocList outline<cr>", opts)
-      -- Search workspace symbols
-      -- keyset("n", "<leader>s", ":<C-u>CocList -I symbols<cr>", opts)
       -- Do default action for next item
       keyset("n", "<leader>j", ":<C-u>CocNext<cr>", opts)
       -- Do default action for previous item

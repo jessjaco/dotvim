@@ -21,14 +21,17 @@ vim.g.python3_host_prog = config_dir .. "/venv/bin/python"
 
 -- Key maps
 local keyset = vim.keymap.set
-keyset('n', '<C-n>', ':Neotree toggle<CR>', { noremap = true, silent = true })
-keyset('n', '<C-l>', ':Neotree buffers toggle<CR>', { noremap = true, silent = true })
+local opts = { noremap = true, silent = true }
+
+-- General
+keyset('n', '<leader>vs', ':vsplit<CR>', opts)
+
+-- Neotree
+keyset('n', '<C-n>', ':Neotree reveal=true toggle<CR>', opts)
+keyset('n', '<C-l>', ':Neotree buffers toggle<CR>', opts)
 
 -- Write docstring for function signature at current line
-vim.keymap.set(
-  'n', '<leader>ds', require('neogen').generate,
-  { noremap = true, silent = true }
-)
+vim.keymap.set('n', '<leader>ds', require('neogen').generate, opts)
 
 local function toggle_breakpoint(text)
   local line = vim.api.nvim_get_current_line()
@@ -58,27 +61,3 @@ vim.api.nvim_create_autocmd("FileType", {
     end, { buffer = true, desc = "Toggle R browser" })
   end,
 })
-
-vim.keymap.set('n', '<leader>df', function()
-  -- Temporarily visually select the function with 'vaf'
-  vim.cmd('normal! vaf')
-
-  -- Get start/end of visual selection
-  local start_pos  = vim.fn.getpos("'<")
-  local end_pos    = vim.fn.getpos("'>")
-  local start_line = start_pos[2]
-  local end_line   = end_pos[2]
-
-  -- Grab the lines of the function
-  local lines      = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-  local func_text  = table.concat(lines, "\n")
-  print(func_text)
-
-  -- Prepare prompt with selected text
-  local prompt =
-      "add a docstring to this function, google style, don't specify types in docs but keep them in sig. I still want the args and returns parts. 80 character line limits.\n" ..
-      func_text
-
-  -- Call gp.nvim's generate function with prompt
-  require('gp').cmd.Prepend(prompt)
-end)
