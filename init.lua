@@ -1,7 +1,7 @@
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = " "
 
 require("config.lazy")
 
@@ -24,7 +24,9 @@ local keyset = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- General
-keyset('n', '<leader>vs', ':vsplit<CR>', opts)
+keyset('n', '<leader>vs', ':vsplit<CR><C-w>l', opts)
+
+keyset('n', '<leader>pi', 'A # pyright: ignore[', opts)
 
 -- Neotree
 keyset('n', '<C-n>', ':Neotree reveal=true toggle<CR>', opts)

@@ -3,6 +3,7 @@ return {
     "robitx/gp.nvim",
     config = function()
       local conf = {
+        chat_free_cursor = true,
         default_command_agent = "CodeGPT4o-mini",
         default_chat_agent = "ChatGPT4o",
         agents = {
