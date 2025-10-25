@@ -24,5 +24,7 @@
   },
   "python.formatting.provider": "black",
   "pyright.testing.provider": "pytest",
-  "pyright.organizeimports.provider": "ruff"
+  "pyright.organizeimports.provider": "ruff",
+  "yaml.enable": true,
+  "yaml.schemaStore.enable": true
 }

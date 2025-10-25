@@ -1,2 +1,3 @@
 neovim
 fortran-language-server
+yamllint
