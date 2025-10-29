@@ -25,6 +25,18 @@ local opts = { noremap = true, silent = true }
 -- General
 keyset('n', '<leader>vs', ':vsplit<CR><C-w>l', opts)
 
+keyset('n', '<leader>`', ':tabnew<CR>', opts)
+keyset('n', '<leader>1', ':tabnext 1<CR>', opts)
+keyset('n', '<leader>2', ':tabnext 2<CR>', opts)
+keyset('n', '<leader>3', ':tabnext 3<CR>', opts)
+keyset('n', '<leader>4', ':tabnext 4<CR>', opts)
+keyset('n', '<leader>5', ':tabnext 5<CR>', opts)
+keyset('n', '<leader>6', ':tabnext 6<CR>', opts)
+keyset('n', '<leader>7', ':tabnext 7<CR>', opts)
+keyset('n', '<leader>8', ':tabnext 8<CR>', opts)
+keyset('n', '<leader>9', ':tabnext 9<CR>', opts)
+
+
 keyset('n', '<leader>pi', 'A # pyright: ignore[', opts)
 
 -- Neotree

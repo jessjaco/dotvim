@@ -3,4 +3,3 @@ setlocal formatoptions-=t
 setlocal formatoptions+=arqrwj
 inoremap ; <space><-<space>
 iabbrev %>% |> 
-
