@@ -18,6 +18,7 @@ return {
         "coc-pyright",
         "coc-r-lsp",
         "coc-sql",
+        "coc-tsserver",
         "coc-yaml",
       }
 
@@ -112,8 +113,7 @@ return {
       -- Apply codeAction to the selected region
       -- Example: `<leader>aap` for current paragraph
       opts = { silent = true, nowait = true }
-      keyset("x", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
-      keyset("n", "<leader>a", "<Plug>(coc-codeaction-selected)", opts)
+      keyset({ "n", "x" }, "<leader>ca", "<Plug>(coc-codeaction-selected)", opts)
 
       -- Remap keys for apply code actions at the cursor position.
       keyset("n", "<leader>ac", "<Plug>(coc-codeaction-cursor)", opts)
