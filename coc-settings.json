@@ -16,7 +16,7 @@
   "Lua.diagnostics.globals": ["vim"],
   "coc.preferences.willSaveHandlerTimeout": 2000,
   "inlayHint.enable": false,
-  "[css][markdown][r][python][typescriptreact][json][jsonc][lua]": {
+  "[css][markdown][r][python][typescriptreact][typescript][json][jsonc][lua]": {
     "coc.preferences.formatOnSave": true
   },
   "python.analysis.diagnosticSeverityOverrides": {

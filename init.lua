@@ -23,7 +23,8 @@ local keyset = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- General
-keyset('n', '<leader>vs', ':vsplit<CR><C-w>l', opts)
+keyset('n', '<leader>vs', ':vsplit<CR><C-w>la', opts)          -- Vertical split & go
+keyset('n', '<leader>vt', ':vsplit<CR><C-w>l:term<CR>a', opts) -- Vertical split & open terminal
 
 keyset('n', '<leader>`', ':tabnew<CR>', opts)
 keyset('n', '<leader>1', ':tabnext 1<CR>', opts)
@@ -41,10 +42,11 @@ keyset('n', '<leader>pi', 'A # pyright: ignore[', opts)
 
 -- Neotree
 keyset('n', '<C-n>', ':Neotree reveal=true toggle<CR>', opts)
-keyset('n', '<C-l>', ':Neotree buffers toggle<CR>', opts)
+keyset('n', '<C-l>', ':Neotree buffers position=right toggle<CR>', opts)
+keyset('n', '<C-g>', ':Neotree git_status toggle<CR>', opts)
 
 -- Write docstring for function signature at current line
-vim.keymap.set('n', '<leader>ds', require('neogen').generate, opts)
+keyset('n', '<leader>ds', function() require('neogen').generate() end, opts)
 
 local function toggle_breakpoint(text)
   local line = vim.api.nvim_get_current_line()
